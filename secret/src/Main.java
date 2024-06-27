@@ -42,4 +42,38 @@ class SecretFunc {
 
     }
 
+    public int prime(int number){
+
+        if (number == 1) return 0;
+        int prime_phi = 1;
+        for (int i = 2; i <= number; i++) {
+            int counter = 0;
+            while (number % i == 0) {
+                number /= i;
+                ++counter;
+            }
+            int a = (int)Math.pow(i , counter);
+            int b =(int) Math.pow(i , counter-1);
+
+            prime_phi *= (a-b);
+        }
+
+        return prime_phi;
+    }
+
+    public boolean gcd(int a, int b)
+    {
+        int i;
+        if (a < b)
+            i = a;
+        else
+            i = b;
+        for (i = i; i > 1; i--) {
+            if (a % i == 0 && b % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+
 }
