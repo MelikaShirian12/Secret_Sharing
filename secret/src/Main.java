@@ -42,6 +42,41 @@ class SecretFunc {
 
     }
 
+
+    public int findSecret() {
+        int result = 0 ;
+        for (int i = 1; i <= n; ++i) {
+            int temp = shareholder_secrets.get(i);
+            for (int j = 1; j <= n; ++j) {
+                if (i == j) continue;
+
+                int numerator = j;
+                int temp1 = j-i;
+
+                if (temp1 < 0) {
+                    temp1 *= -1;
+                    numerator *= -1;
+
+                    while( numerator < 0)
+                        numerator += p;
+                }
+
+
+                if ( ! gcd(p , temp1))
+                    throw new RuntimeException("we don't have this inverse !");
+
+                int denominator = (int) (Math.pow(temp1, prime(p)-1) % p);
+
+                temp *= numerator * denominator;
+                temp %= p;
+            }
+
+            result += temp % p;
+        }
+
+        return result % p;
+    }
+
     public int prime(int number){
 
         if (number == 1) return 0;
