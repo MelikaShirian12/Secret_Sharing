@@ -1,7 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("s : the secret : ");
+        int s = sc.nextInt();
+        System.out.println("t : Curve degree :");
+        int t = sc.nextInt();
+        System.out.println("n : number of people : (it should be more than t)");
+        int n = sc.nextInt();
+        System.out.println("p : measure : (choose it wisely so you won't get problem on solving the equations" +
+                "while you are calculating the inverses)");
+        int p = sc.nextInt();
+
+        SecretFunc secretFunc = new SecretFunc();
+
+        try {
+            secretFunc.makeFunction(s%p , t, n, p);
+        } catch (IllegalAccessException e) {
+        }
+
+        int final_s = secretFunc.findSecret();
+        System.out.println(final_s);
+
+        if (final_s == secretFunc.s)
+            System.out.println("calculations you were right !");
+
+
+    }
+
+}
 
 
 class SecretFunc {
